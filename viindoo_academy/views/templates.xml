@@ -1,20 +1,34 @@
 <odoo>
     <data>
-<record id="deducation_class_view_tree" model="ir.ui.view">
-
-
-
-
-
-
-</record>
-
-
-
-
-
-
-
-
+        <template id="index">
+            <t t-call="website.layout">
+                <title>Academy</title>
+                <t t-foreach="teachers" t-as="teacher">
+                    <p><t t-esc="teacher.id"/>
+                        <t t-esc="teacher.name"/>
+                        <t t-esc="teacher.age"/>
+                        <t t-esc="teacher.birth_date"/>
+                        <a t-attf-href="/viindoo_academy/{{slug(teacher)}}"/>
+                    </p>
+                </t>
+            </t>
+        </template>
+        <template id="biography">
+            <t t-call="website.layout">
+                <t t-set="title">Academy</t>
+                    <div class="oe_structure"/>
+                        <div class="container">
+                        <h3 t-field="person.name"/>
+                        <div t-field="person.biography"/>
+                    </div>
+                <div class="oe_structure">
+                    <div class="container">
+                        <h3><t t-esc="person.name"/></h3>
+                        <div><t t-esc="person.biography"/></div>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+            </t>
+        </template>
     </data>
 </odoo>

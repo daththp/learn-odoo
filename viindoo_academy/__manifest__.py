@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['website'],
 
     # always loaded
     'data': [
@@ -33,7 +33,7 @@
         'views/education_enrollment_views.xml',
         'reports/academy_report_view.xml',
         'reports/academy_report_table_view.xml',
-        # 'views/templates.xml',
+        'views/templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
