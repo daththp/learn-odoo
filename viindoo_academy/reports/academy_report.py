@@ -20,7 +20,7 @@ class AcademyReport(models.Model):
 
     def _select(self):
         return """
-        SELECT enrollment.id AS enrollment_id,
+        SELECT enrollment.id AS id,
             student.id AS student_id,
             class.id AS class_id,
             enrollment.date AS date,
