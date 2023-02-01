@@ -1,9 +1,10 @@
 from odoo import models, fields, api
+from odoo import tools
 
 
-class AcademyReport(models.Model):
-    _name = 'academy.report'
-    _description = 'Academy Report'
+class AcademyReportTable(models.Model):
+    _name = 'academy.report.table'
+    _description = 'Academy Report Table'
     _auto = False
 
     enrollment_id = fields.Many2one('education.enrollment', readonly=True)
@@ -15,9 +16,6 @@ class AcademyReport(models.Model):
     start_date = fields.Date(string='Start Date', readonly=True)
     end_date = fields.Date(string='End Date', readonly=True)
     
-    @property
-    def _table_query(self):
-        return "%s %s" % (self._select(), self._from())
 
     def _select(self):
         return """
@@ -39,5 +37,14 @@ class AcademyReport(models.Model):
             LEFT JOIN res_ethnic eth ON eth.id = student.ethnic_id
             LEFT JOIN res_country c ON c.id =  student.country_id
         """
-        
-        
+
+    def init(self):
+        tools.drop_view_if_exists(self.env.cr, self._table)
+
+        self.env.cr.execute("""
+            CREATE OR REPLACE VIEW %s AS (
+                %s
+                %s
+            )
+        """ % (self._table, self._select(), self._from())
+                            )
