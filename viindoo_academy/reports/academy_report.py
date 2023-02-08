@@ -4,7 +4,6 @@ from odoo import models, fields, api
 class AcademyReport(models.Model):
     _name = 'academy.report'
     _description = 'Academy Report'
-    _auto = False
 
     enrollment_id = fields.Many2one('education.enrollment', readonly=True)
     student_id = fields.Many2one('education.student', readonly=True)
